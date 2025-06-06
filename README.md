@@ -1,55 +1,67 @@
 # Next.js & HeroUI Template
 
-This is a template for creating applications using Next.js 14 (pages directory) and HeroUI (v2).
+Este é um template base para criar aplicações com [Next.js 14](https://nextjs.org/docs/getting-started) (utilizando o diretório `pages`) e [HeroUI v2](https://heroui.com), com suporte a Tailwind CSS, TypeScript, animações com Framer Motion e mais.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/next-pages-template)
+## 🚀 Tecnologias Utilizadas
 
-> Note: Since Next.js 14, the pages router is recommend migrating to the [new App Router](https://nextjs.org/docs/app) to leverage React's latest features
->
-> Read more: [Pages Router](https://nextjs.org/docs/pages)
-
-## Technologies Used
-
-- [Next.js 14](https://nextjs.org/docs/getting-started)
+- [Next.js 14](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [HeroUI](https://heroui.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
 - [Framer Motion](https://www.framer.com/motion)
+- [React](https://reactjs.org)
+- [React Icons](https://react-icons.github.io/react-icons)
 - [next-themes](https://github.com/pacocoursey/next-themes)
 
-## How to Use
+> ⚠️ Desde o Next.js 14, é recomendado migrar para o [App Router](https://nextjs.org/docs/app) para aproveitar os recursos mais modernos do React.
+>
+> Este projeto utiliza o Pages Router por simplicidade e compatibilidade com o HeroUI.
 
-To create a new project based on this template using `create-next-app`, run the following command:
+---
 
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-pages-template
-```
+## 📦 Como Usar
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Clone este repositório e instale as dependências:
 
 ```bash
-npm install
+git clone https://github.com/ANDERSONGUASSU/movie1.0.git
+cd movie1.0
+npm install  # ou: yarn / pnpm / bun
 ```
 
-### Run the development server
+### ▶️ Rodar o servidor de desenvolvimento
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+---
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+## ⚙️ Usando `pnpm` (opcional)
+
+Se estiver usando `pnpm`, adicione o seguinte ao arquivo `.npmrc`:
 
 ```bash
 public-hoist-pattern[]=*@heroui/*
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+Depois disso, rode novamente:
 
-## License
+```bash
+pnpm install
+```
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-pages-template/blob/main/LICENSE).
+---
+
+## 🧪 Demo
+
+Você pode testar rapidamente com CodeSandbox:
+
+[Abrir no CodeSandbox](https://githubbox.com/ANDERSONGUASSU/movie1.0)
+
+---
+
+## 📄 Licença
+
+Distribuído sob a [licença MIT](LICENSE).
