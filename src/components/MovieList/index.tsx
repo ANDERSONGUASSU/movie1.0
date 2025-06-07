@@ -18,6 +18,7 @@ export default function MovieList() {
   const [genres, setGenres] = useState<number[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<string>("popularity.desc");
 
   const getMovies = async () => {
     try {
@@ -28,11 +29,13 @@ export default function MovieList() {
             api_key: "6ecbcf4cfd936091028f5873b5c422be",
             language: "pt-BR",
             include_adult: showAdult,
+            sort_by: sortBy,
             page,
             ...(genres.length > 0 && { with_genres: genres.join(",") }),
             ...(year && {
               primary_release_year: year,
             }),
+            ...(sortBy === "vote_average.desc" && { "vote_count.gte": 100 }),
           },
         },
       );
@@ -105,11 +108,11 @@ export default function MovieList() {
   useEffect(() => {
     getMovies();
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [year, showAdult, certifications, genres, page]);
+  }, [year, showAdult, certifications, genres, page, sortBy]);
 
   useEffect(() => {
     setPage(1);
-  }, [year, showAdult, certifications, genres]);
+  }, [year, showAdult, certifications, genres, sortBy]);
 
   return (
     <div>
@@ -119,8 +122,10 @@ export default function MovieList() {
         setCertifications={setCertifications}
         setGenres={setGenres}
         setShowAdult={setShowAdult}
+        setSortBy={setSortBy}
         setYear={setYear}
         showAdult={showAdult}
+        sortBy={sortBy}
         year={year}
       />
 
