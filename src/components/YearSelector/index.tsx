@@ -28,7 +28,7 @@ export default function YearSelector({ year, onYearChange }: Props) {
   };
 
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center gap-2">
       <label className="text-white" htmlFor="year">
         Ano:
       </label>

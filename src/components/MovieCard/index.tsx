@@ -18,16 +18,16 @@ export default function MovieCard(props: Props) {
       <li>
         <Card
           isBlurred
-          className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+          className="border-none bg-background/60 dark:bg-default-100/50 w-[610px]"
           shadow="sm"
         >
           <CardBody>
-            <div className="grid gird-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+            <div className="grid gird-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center h-96">
               <div className="relative col-span-6 md:col-span-4">
                 <Image
                   alt={movie.title}
                   className="object-cover"
-                  height={200}
+                  height="100%"
                   shadow="md"
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   width="100%"
@@ -40,7 +40,7 @@ export default function MovieCard(props: Props) {
                       {movie.title}
                     </h1>
                     {movie.certification && (
-                      <span className="inline-block py-1 text-white rounded text-sm bg-red-600 px-2 w-8 text-center mb-2">
+                      <span className="inline-block py-1 text-white rounded text-sm bg-red-600 px-2 max-w-20 text-center mb-2">
                         {movie.certification}
                       </span>
                     )}
@@ -48,7 +48,7 @@ export default function MovieCard(props: Props) {
                     <p>
                       {new Date(movie.release_date).toLocaleDateString("pt-BR")}
                     </p>
-                    <p className="text-yellow-200 text-xl mt-2">
+                    <p className="text-yellow-200 text-xl mt-2 line-clamp-4 overflow-hidden">
                       {movie.overview}
                     </p>
                   </div>

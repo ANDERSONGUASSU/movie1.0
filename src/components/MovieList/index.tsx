@@ -7,10 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import MovieCard from "../MovieCard";
-import YearSelector from "../YearSelector";
-import AdultFilter from "../AdultFilter";
-import CertificationFilter from "../CertificationFilter";
-import GenreFilter from "../GenreFilter";
+import Filters from "../Filters";
 
 export default function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -19,6 +16,8 @@ export default function MovieList() {
   const [showAdult, setShowAdult] = useState(false);
   const [certifications, setCertifications] = useState<string[]>([]);
   const [genres, setGenres] = useState<number[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const getMovies = async () => {
     try {
@@ -29,6 +28,7 @@ export default function MovieList() {
             api_key: "6ecbcf4cfd936091028f5873b5c422be",
             language: "pt-BR",
             include_adult: showAdult,
+            page,
             ...(genres.length > 0 && { with_genres: genres.join(",") }),
             ...(year && {
               primary_release_year: year,
@@ -36,6 +36,9 @@ export default function MovieList() {
           },
         },
       );
+
+      setTotalPages(response.data.total_pages);
+
       const moviesWithCertification = await Promise.all(
         response.data.results.map(async (movie) => {
           try {
@@ -101,17 +104,25 @@ export default function MovieList() {
 
   useEffect(() => {
     getMovies();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [year, showAdult, certifications, genres, page]);
+
+  useEffect(() => {
+    setPage(1);
   }, [year, showAdult, certifications, genres]);
 
   return (
     <div>
-      <YearSelector year={year} onYearChange={setYear} />
-      <AdultFilter showAdult={showAdult} onToggle={setShowAdult} />
-      <CertificationFilter
-        selectedCertifications={certifications}
-        onChange={setCertifications}
+      <Filters
+        certifications={certifications}
+        genres={genres}
+        setCertifications={setCertifications}
+        setGenres={setGenres}
+        setShowAdult={setShowAdult}
+        setYear={setYear}
+        showAdult={showAdult}
+        year={year}
       />
-      <GenreFilter selectedGenres={genres} onChange={setGenres} />
 
       {error && <p className="text-red-500 text-center py-4">{error}</p>}
 
@@ -120,6 +131,25 @@ export default function MovieList() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </ul>
+      <div className="flex justify-center items-center gap-4 py-4">
+        <button
+          className="px-4 py-2 bg-gray-700 text-white rounded disabled:opacity-50"
+          disabled={page === 1}
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+        >
+          Anterior
+        </button>
+        <span className="text-white">
+          Página {page} de {totalPages}
+        </span>
+        <button
+          className="px-4 py-2 bg-gray-700 text-white rounded disabled:opacity-50"
+          disabled={page >= totalPages}
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+        >
+          Próxima
+        </button>
+      </div>
     </div>
   );
 }
